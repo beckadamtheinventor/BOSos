@@ -1,0 +1,312 @@
+<html><head><title>bos.inc docs</title><link rel="stylesheet" type="text/css" href="style.css"></head><body><h1>"bos.inc" documentation</h1><h3>syscalls marked in <a class="no_op">red</a> are no-ops and do nothing.</h3><h3>Don't copy the sources directly from the documentation. Instead download <a href="sources.zip">this archive</a></h3><table><th>syscall name</th><th>syscall adress</th><th>links</th><tr><td>bos.handle_boot</td><td>020108</td><td><a href="#handle_boot">doc</a></tr>
+<tr><td>bos.handle_int</td><td>02010C</td><td><a href="#handle_int">doc</a></tr>
+<tr><td>bos.handle_rst10</td><td>020110</td><td><a href="#handle_rst10">doc</a></tr>
+<tr><td>bos.handle_rst18</td><td>020114</td><td><a href="#handle_rst18">doc</a></tr>
+<tr><td>bos.handle_rst20</td><td>020118</td><td><a href="#handle_rst20">doc</a></tr>
+<tr><td>bos.handle_rst28</td><td>02011C</td><td><a href="#handle_rst28">doc</a></tr>
+<tr><td>bos.handle_rst30</td><td>020120</td><td><a href="#handle_rst30">doc</a></tr>
+<tr><td>bos.sys_MemSet</td><td>020124</td><td><a href="#sys_MemSet">doc</a></tr>
+<tr><td>bos.sys_AddHLAndA</td><td>020128</td><td><a href="#sys_AddHLAndA">doc</a></tr>
+<tr><td>bos.sys_HLToString</td><td>02012C</td><td><a href="#sys_HLToString">doc</a></tr>
+<tr><td>bos.kb_Scan</td><td>020130</td><td><a href="#kb_Scan">doc</a></tr>
+<tr><td>bos.kb_AnyKey</td><td>020134</td><td><a href="#kb_AnyKey">doc</a></tr>
+<tr><td>bos.sys_GetKey</td><td>020138</td><td><a href="#sys_GetKey">doc</a></tr>
+<tr><td>bos.sys_WaitKey</td><td>02013C</td><td><a href="#sys_WaitKey">doc</a></tr>
+<tr><td>bos.sys_AddHLAndMltBC</td><td>020140</td><td><a href="#sys_AddHLAndMltBC">doc</a></tr>
+<tr><td>bos.sys_AddHLAndASectors</td><td>020144</td><td><a href="#sys_AddHLAndASectors">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020148</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02014C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020150</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020154</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020158</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02015C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020160</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020164</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020168</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02016C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020170</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020174</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020178</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02017C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020180</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020184</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020188</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02018C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020190</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020194</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020198</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02019C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201A0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.str_len</td><td>0201A4</td><td><a href="#str_len">doc</a></tr>
+<tr><td>bos.str_set</td><td>0201A8</td><td><a href="#str_set">doc</a></tr>
+<tr><td>bos.str_cpy</td><td>0201AC</td><td><a href="#str_cpy">doc</a></tr>
+<tr><td>bos.str_cmp</td><td>0201B0</td><td><a href="#str_cmp">doc</a></tr>
+<tr><td>bos.str_upper</td><td>0201B4</td><td><a href="#str_upper">doc</a></tr>
+<tr><td>bos.str_lower</td><td>0201B8</td><td><a href="#str_lower">doc</a></tr>
+<tr><td>bos.str_n_cpy</td><td>0201BC</td><td><a href="#str_n_cpy">doc</a></tr>
+<tr><td>bos.str_n_cmp</td><td>0201C0</td><td><a href="#str_n_cmp">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201C4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201C8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201CC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201D0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201D4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201D8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201DC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201E0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201E4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201E8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201EC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201F0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201F4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201F8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0201FC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020200</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020204</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020208</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02020C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020210</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020214</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020218</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02021C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020220</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.sys_BuildVAT</td><td>020224</td><td><a href="#sys_BuildVAT">doc</a></tr>
+<tr><td>bos.sys_FindSym</td><td>020228</td><td><a href="#sys_FindSym">doc</a></tr>
+<tr><td>bos.sys_CreateFile</td><td>02022C</td><td><a href="#sys_CreateFile">doc</a></tr>
+<tr><td>bos.fs_FGetC</td><td>020230</td><td><a href="#fs_FGetC">doc</a></tr>
+<tr><td>bos.fs_FPutC</td><td>020234</td><td><a href="#fs_FPutC">doc</a></tr>
+<tr><td>bos.fs_FOpen</td><td>020238</td><td><a href="#fs_FOpen">doc</a></tr>
+<tr><td>bos.fs_FRead</td><td>02023C</td><td><a href="#fs_FRead">doc</a></tr>
+<tr><td>bos.fs_FWrite</td><td>020240</td><td><a href="#fs_FWrite">doc</a></tr>
+<tr><td>bos.fs_FTell</td><td>020244</td><td><a href="#fs_FTell">doc</a></tr>
+<tr><td>bos.fs_FSeek</td><td>020248</td><td><a href="#fs_FSeek">doc</a></tr>
+<tr><td>bos.fs_Delete</td><td>02024C</td><td><a href="#fs_Delete">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020250</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020254</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020258</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02025C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020260</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020264</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020268</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02026C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020270</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020274</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020278</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02027C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020280</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020284</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020288</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02028C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020290</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020294</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020298</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02029C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202A0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.gfx_Set8bpp</td><td>0202A4</td><td><a href="#gfx_Set8bpp">doc</a></tr>
+<tr><td>bos.gfx_Set16bpp</td><td>0202A8</td><td><a href="#gfx_Set16bpp">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202AC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202B0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202B4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202B8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.gfx_PutS</td><td>0202BC</td><td><a href="#gfx_PutS">doc</a></tr>
+<tr><td>bos.gfx_LcdClear</td><td>0202C0</td><td><a href="#gfx_LcdClear">doc</a></tr>
+<tr><td>bos.gfx_BufClear</td><td>0202C4</td><td><a href="#gfx_BufClear">doc</a></tr>
+<tr><td>bos.gfx_BlitBuffer</td><td>0202C8</td><td><a href="#gfx_BlitBuffer">doc</a></tr>
+<tr><td>bos.gfx_PrintUInt</td><td>0202CC</td><td><a href="#gfx_PrintUInt">doc</a></tr>
+<tr><td>bos.gfx_Compute</td><td>0202D0</td><td><a href="#gfx_Compute">doc</a></tr>
+<tr><td>bos.gfx_HorizLine</td><td>0202D4</td><td><a href="#gfx_HorizLine">doc</a></tr>
+<tr><td>bos.gfx_VertLine</td><td>0202D8</td><td><a href="#gfx_VertLine">doc</a></tr>
+<tr><td>bos.gfx_Rectangle</td><td>0202DC</td><td><a href="#gfx_Rectangle">doc</a></tr>
+<tr><td>bos.gfx_FillRectangle</td><td>0202E0</td><td><a href="#gfx_FillRectangle">doc</a></tr>
+<tr><td>bos.gfx_Sprite</td><td>0202E4</td><td><a href="#gfx_Sprite">doc</a></tr>
+<tr><td>bos.gfx_PutC</td><td>0202E8</td><td><a href="#gfx_PutC">doc</a></tr>
+<tr><td>bos.gfx_NextLine</td><td>0202EC</td><td><a href="#gfx_NextLine">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202F0</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202F4</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202F8</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0202FC</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020300</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020304</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020308</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02030C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020310</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020314</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020318</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02031C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020320</td><td><a href="#DONOTHING">doc</a></tr>
+</table><div id="handle_boot"><h1>handle_boot</h1><h3>syscall Adress 020108</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_int"><h1>handle_int</h1><h3>syscall Adress 02010C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_rst10"><h1>handle_rst10</h1><h3>syscall Adress 020110</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_rst18"><h1>handle_rst18</h1><h3>syscall Adress 020114</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_rst20"><h1>handle_rst20</h1><h3>syscall Adress 020118</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_rst28"><h1>handle_rst28</h1><h3>syscall Adress 02011C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="handle_rst30"><h1>handle_rst30</h1><h3>syscall Adress 020120</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table></div><div id="sys_MemSet"><h1>sys_MemSet</h1><h3>syscall Adress 020124</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to set<br>
+ BC amount to set<br>
+ A byte to set memory to</td><td> set BC bytes of HL to the value A</td><td> HL HL+BC<br>
+ DE HL+BC+1</td><td> AF</td></tr>
+</table></div><div id="sys_AddHLAndA"><h1>sys_AddHLAndA</h1><h3>syscall Adress 020128</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL number<br>
+ A increment</td><td> HL+=A</td><td> HL number+increment</td><td> AF</td></tr>
+</table></div><div id="sys_HLToString"><h1>sys_HLToString</h1><h3>syscall Adress 02012C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL number to convert</td><td> convert a number to a string</td><td> string stored at gfx_string_temp</td><td></td></tr>
+</table></div><div id="kb_Scan"><h1>kb_Scan</h1><h3>syscall Adress 020130</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> Scans the keypad and updates data registers</td><td></td><td> HL,AF</td></tr>
+</table></div>@NOTE Disables interrupts during execution, and restores on exit<div id="kb_AnyKey"><h1>kb_AnyKey</h1><h3>syscall Adress 020134</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> Scans the keypad and updates data registers; checking if a key was pressed</td><td> 0 if no keys pressed</td><td> HL,AF</td></tr>
+</table></div>@NOTE Disables interrupts during execution<div id="sys_GetKey"><h1>sys_GetKey</h1><h3>syscall Adress 020138</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> Return current keypress</td><td> A keypress<br>
+ z if no key pressed</td><td> HL,DE,BC,AF</td></tr>
+</table></div><div id="sys_WaitKey"><h1>sys_WaitKey</h1><h3>syscall Adress 02013C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> Wait until a key is pressed and return it</td><td></td><td> HL,DE,BC,AF</td></tr>
+</table></div><div id="sys_AddHLAndMltBC"><h1>sys_AddHLAndMltBC</h1><h3>syscall Adress 020140</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL number<br>
+ B increment_1<br>
+ C increment_2</td><td> HL+=B*C, saves BC</td><td> HL number + increment_1 * increment_2</td><td> AF</td></tr>
+</table></div><div id="sys_AddHLAndASectors"><h1>sys_AddHLAndASectors</h1><h3>syscall Adress 020144</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A number of sectors</td><td> HL+=256*A, saves BC</td><td> HL HL + 256 * A</td><td> AF</td></tr>
+</table></div><div id="str_len"><h1>str_len</h1><h3>syscall Adress 0201A4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string</td><td> find length of null-terminated string</td><td> BC length of string</td><td> AF</td></tr>
+</table></div><div id="str_set"><h1>str_set</h1><h3>syscall Adress 0201A8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string<br>
+ C value to set bytes to</td><td> set the bytes of null-terminated string</td><td> HL HL+strlen(HL)</td><td> AF</td></tr>
+</table></div><div id="str_cpy"><h1>str_cpy</h1><h3>syscall Adress 0201AC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="str_cmp"><h1>str_cmp</h1><h3>syscall Adress 0201B0</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string<br>
+ DE pointer to string</td><td> compare two strings</td><td> return z if the strings are equal, else nz<br>
+ BC BC-min(strlen(HL),strlen(DE))</td><td></td></tr>
+</table></div><div id="str_upper"><h1>str_upper</h1><h3>syscall Adress 0201B4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string</td><td> convert a string to uppercase</td><td> HL HL+strlen(HL)</td><td> AF</td></tr>
+</table></div><div id="str_lower"><h1>str_lower</h1><h3>syscall Adress 0201B8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string</td><td> convert a string to lowercase</td><td> HL HL+strlen(HL)</td><td> AF</td></tr>
+</table></div><div id="str_n_cpy"><h1>str_n_cpy</h1><h3>syscall Adress 0201BC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to null-terminated string<br>
+ DE pointer to destination<br>
+ BC maximum bytes to copy</td><td> copy null-terminated string, with maximum copy amount</td><td> HL pointer to null-terminated string</td><td></td></tr>
+</table></div><div id="str_n_cmp"><h1>str_n_cmp</h1><h3>syscall Adress 0201C0</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string<br>
+ DE pointer to string<br>
+ BC maximum string length</td><td> compare two strings, stopping at the maximum length</td><td> return z if the strings are equal, else nz</td><td> AF</td></tr>
+</table></div><div id="sys_BuildVAT"><h1>sys_BuildVAT</h1><h3>syscall Adress 020224</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> build the VAT</td><td></td><td> All</td></tr>
+</table></div><div id="sys_FindSym"><h1>sys_FindSym</h1><h3>syscall Adress 020228</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL points to file name</td><td> search the VAT for a file</td><td> DE points to VAT entry<br>
+ C flag is set if failed</td><td> AF,BC</td></tr>
+</table></div><div id="sys_CreateFile"><h1>sys_CreateFile</h1><h3>syscall Adress 02022C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL file name<br>
+ A number of sectors to reserve</td><td> create a new file, in RAM</td><td> HL pointer to VAT entry<br>
+ DE pointer to file data section</td><td></td></tr>
+</table></div><div id="fs_FGetC"><h1>fs_FGetC</h1><h3>syscall Adress 020230</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A file handle</td><td> read a character from a file</td><td> C character</td><td> AF,DE,HL</td></tr>
+</table></div><div id="fs_FPutC"><h1>fs_FPutC</h1><h3>syscall Adress 020234</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="fs_FOpen"><h1>fs_FOpen</h1><h3>syscall Adress 020238</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL points to file name<br>
+ A file open mode</td><td> open a file and return a handle</td><td> - C flag set if failed<br>
+ A open mode flags that couldn't be applied to the file (only if C flag set)<br>
+ A file handle (only if C flag not set)</td><td></td></tr>
+</table></div><div id="fs_FRead"><h1>fs_FRead</h1><h3>syscall Adress 02023C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="fs_FWrite"><h1>fs_FWrite</h1><h3>syscall Adress 020240</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="fs_FTell"><h1>fs_FTell</h1><h3>syscall Adress 020244</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="fs_FSeek"><h1>fs_FSeek</h1><h3>syscall Adress 020248</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="fs_Delete"><h1>fs_Delete</h1><h3>syscall Adress 02024C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+</table></div><div id="gfx_Set8bpp"><h1>gfx_Set8bpp</h1><h3>syscall Adress 0202A4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> set the lcd to 8bpp mode</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_Set16bpp"><h1>gfx_Set16bpp</h1><h3>syscall Adress 0202A8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> set the lcd to 16bpp mode</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_PutS"><h1>gfx_PutS</h1><h3>syscall Adress 0202BC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to string</td><td> print a string to the back buffer</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_LcdClear"><h1>gfx_LcdClear</h1><h3>syscall Adress 0202C0</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A color to fill with</td><td> clears the lcd</td><td></td><td> all except A</td></tr>
+</table></div><div id="gfx_BufClear"><h1>gfx_BufClear</h1><h3>syscall Adress 0202C4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A color to fill with</td><td> clears the back buffer</td><td></td><td> all except A</td></tr>
+</table></div><div id="gfx_BlitBuffer"><h1>gfx_BlitBuffer</h1><h3>syscall Adress 0202C8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> copies the back buffer to the lcd</td><td></td><td> all except A</td></tr>
+</table></div><div id="gfx_PrintUInt"><h1>gfx_PrintUInt</h1><h3>syscall Adress 0202CC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL number to display<br>
+ A characters to use (8-nchars)</td><td> print a number to the back buffer</td><td> string stored at gfx_string_temp</td><td></td></tr>
+</table></div><div id="gfx_Compute"><h1>gfx_Compute</h1><h3>syscall Adress 0202D0</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL X coordinate<br>
+ E Y coordinate</td><td> compute draw location on the back buffer from XY coodinate.</td><td> HL pointer to draw location</td><td> AF, DE</td></tr>
+</table></div><div id="gfx_HorizLine"><h1>gfx_HorizLine</h1><h3>syscall Adress 0202D4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL line X coordinate<br>
+ E line Y coordinate<br>
+ BC line length</td><td> draws a horizontal line</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_VertLine"><h1>gfx_VertLine</h1><h3>syscall Adress 0202D8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL line X coordinate<br>
+ E line Y coordinate<br>
+ B line length</td><td> draws a vertical line</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_Rectangle"><h1>gfx_Rectangle</h1><h3>syscall Adress 0202DC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> BC rectangle width<br>
+ HL rectangle X coordinate<br>
+ E rectangle Y coordinate<br>
+ D rectangle height</td><td> draws a rectangle outline to the back buffer</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_FillRectangle"><h1>gfx_FillRectangle</h1><h3>syscall Adress 0202E0</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> BC rectangle width<br>
+ HL rectangle X coordinate<br>
+ E rectangle Y coordinate<br>
+ A rectangle height</td><td> draws a filled rectangle to the back buffer</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_Sprite"><h1>gfx_Sprite</h1><h3>syscall Adress 0202E4</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to sprite<br>
+ BC X<<8 + Y</td><td> draws a sprite to the back buffer</td><td></td><td> all</td></tr>
+</table></div><div id="gfx_PutC"><h1>gfx_PutC</h1><h3>syscall Adress 0202E8</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A character to draw</td><td> print a character to the back buffer</td><td></td><td> all except DE</td></tr>
+</table></div><div id="gfx_NextLine"><h1>gfx_NextLine</h1><h3>syscall Adress 0202EC</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td></td><td> moves the text position 9 rows ahead, and zeroes the collumn.</td><td></td><td> HL,A</td></tr>
+</table></div></body></html>
