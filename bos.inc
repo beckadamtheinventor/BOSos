@@ -430,10 +430,6 @@ namespace bos
 ;;-------------------------------------------------------------------------------
 ?gfx_Set8bpp                     := $202A4
 ?gfx_Set16bpp                    := $202A8
-?gfx_LoadFont                    := $202AC
-?gfx_SetColor                    := $202B0
-?gfx_SetTextXY                   := $202B4
-?gfx_GetTextXY                   := $202B8
 ?gfx_PutS                        := $202BC
 ?gfx_LcdClear                    := $202C0
 ?gfx_BufClear                    := $202C4

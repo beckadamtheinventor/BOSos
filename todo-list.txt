@@ -1,0 +1,18 @@
+
+in progress:
+* filesystem
+* os routines
+* sys routines
+
+on the drawing board:
+* run user applications
+* framework for programs
+* os user interface
+
+Most user programs execute from a static RAM adress.
+There will be some sort of DLL-type thing.
+
+Most RAM allocation will be appended to the current end-of-RAM pointer.
+When stuff is marked for deletion it will be flagged as an open space, and will be reused next time the end-of-RAM pointer overflows.
+
+

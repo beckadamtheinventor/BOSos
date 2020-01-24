@@ -83,7 +83,7 @@ with open("docs/index.html","w") as f:
 <body>\
 <h1>\"bos.inc\" documentation</h1>\
 <h3>syscalls marked in <a class=\"no_op\">red</a> are no-ops and do nothing.</h3>\
-<h3>Don't copy the sources directly from the documentation. Instead download <a href=\"sources.zip\">this archive</a></h3>\
+<h3>Download <a href=\"sources.zip\">this archive</a> to view the source code</h3>\
 <table><th>syscall name</th><th>syscall adress</th><th>links</th>\
 ")
 	with open("docs/tmp","w") as f2:
