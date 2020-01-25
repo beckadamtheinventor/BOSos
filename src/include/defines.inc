@@ -38,8 +38,8 @@ lcd_x                  := ScrapWord+3
 lcd_y                  := lcd_x+3
 _InputBuffer           := lcd_y+1
 
-next_free_RAM          := _InputBuffer+257
-open_files_table       := next_free_RAM+3
+free_RAM_ptr           := _InputBuffer+257
+open_files_table       := free_RAM_ptr+3
 free_VAT_entry_ptr     := open_files_table+256
 first_VAT_section      := free_VAT_entry_ptr+3
 

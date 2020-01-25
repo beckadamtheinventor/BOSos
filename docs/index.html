@@ -12,8 +12,8 @@
 <tr><td>bos.kb_AnyKey</td><td>020134</td><td><a href="#kb_AnyKey">doc</a></tr>
 <tr><td>bos.sys_GetKey</td><td>020138</td><td><a href="#sys_GetKey">doc</a></tr>
 <tr><td>bos.sys_WaitKey</td><td>02013C</td><td><a href="#sys_WaitKey">doc</a></tr>
-<tr><td>bos.sys_AddHLAndMltBC</td><td>020140</td><td><a href="#sys_AddHLAndMltBC">doc</a></tr>
-<tr><td>bos.sys_AddHLAndASectors</td><td>020144</td><td><a href="#sys_AddHLAndASectors">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020140</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020144</td><td><a href="#DONOTHING">doc</a></tr>
 <tr class="no_op"><td>bos.DONOTHING</td><td>020148</td><td><a href="#DONOTHING">doc</a></tr>
 <tr class="no_op"><td>bos.DONOTHING</td><td>02014C</td><td><a href="#DONOTHING">doc</a></tr>
 <tr class="no_op"><td>bos.DONOTHING</td><td>020150</td><td><a href="#DONOTHING">doc</a></tr>
@@ -180,14 +180,6 @@
 </table></div><div id="sys_WaitKey"><h1>sys_WaitKey</h1><h3>syscall Adress 02013C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td></td><td> Wait until a key is pressed and return it</td><td></td><td> HL,DE,BC,AF</td></tr>
-</table></div><div id="sys_AddHLAndMltBC"><h1>sys_AddHLAndMltBC</h1><h3>syscall Adress 020140</h3>
-<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-<tr><td> HL number<br>
- B increment_1<br>
- C increment_2</td><td> HL+=B*C, saves BC</td><td> HL number + increment_1 * increment_2</td><td> AF</td></tr>
-</table></div><div id="sys_AddHLAndASectors"><h1>sys_AddHLAndASectors</h1><h3>syscall Adress 020144</h3>
-<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-<tr><td> A number of sectors</td><td> HL+=256*A, saves BC</td><td> HL HL + 256 * A</td><td> AF</td></tr>
 </table></div><div id="str_len"><h1>str_len</h1><h3>syscall Adress 0201A4</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td> HL pointer to string</td><td> find length of null-terminated string</td><td> BC length of string</td><td> AF</td></tr>
@@ -197,6 +189,10 @@
  C value to set bytes to</td><td> set the bytes of null-terminated string</td><td> HL HL+strlen(HL)</td><td> AF</td></tr>
 </table></div><div id="str_cpy"><h1>str_cpy</h1><h3>syscall Adress 0201AC</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> HL pointer to null-terminated string<br>
+ DE pointer to destination</td><td> copy null-terminated string</td><td> HL pointer to null-terminated string<br>
+ DE DE+HL+strlen(HL)<br>
+ BC BC-strlen(HL)</td><td> AF</td></tr>
 </table></div><div id="str_cmp"><h1>str_cmp</h1><h3>syscall Adress 0201B0</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td> HL pointer to string<br>
@@ -225,27 +221,40 @@
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td> HL points to file name</td><td> search the VAT for a file</td><td> DE points to VAT entry<br>
  C flag is set if failed</td><td> AF,BC</td></tr>
-</table></div><div id="sys_CreateFile"><h1>sys_CreateFile</h1><h3>syscall Adress 02022C</h3>
+</table></div>@NOTE saves HL<div id="sys_CreateFile"><h1>sys_CreateFile</h1><h3>syscall Adress 02022C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-<tr><td> HL file name<br>
- A number of sectors to reserve</td><td> create a new file, in RAM</td><td> HL pointer to VAT entry<br>
- DE pointer to file data section</td><td></td></tr>
+<tr><td> HL = file name (8b name, 3b extension = 11 bytes)<br>
+ DE = file size</td><td> create a new file, in RAM</td><td> HL = pointer to VAT entry<br>
+ DE = pointer to file data section<br>
+ C flag is set if failed</td><td> AF,BC</td></tr>
 </table></div><div id="fs_FGetC"><h1>fs_FGetC</h1><h3>syscall Adress 020230</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-<tr><td> A file handle</td><td> read a character from a file</td><td> C character</td><td> AF,DE,HL</td></tr>
-</table></div><div id="fs_FPutC"><h1>fs_FPutC</h1><h3>syscall Adress 020234</h3>
+<tr><td> A = file handle</td><td> read a character from a file</td><td> C = character<br>
+ C flag set if EOF reached<br>
+ Z flag set if success, else failed</td><td> All</td></tr>
+</table></div>@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i><div id="fs_FPutC"><h1>fs_FPutC</h1><h3>syscall Adress 020234</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-</table></div><div id="fs_FOpen"><h1>fs_FOpen</h1><h3>syscall Adress 020238</h3>
+<tr><td> A = file handle<br>
+ C = character</td><td> write a character to a file</td><td> Z flag set if success, else failed<br>
+ C flag if not enough memory or file too large</td><td> All</td></tr>
+</table></div>@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i><div id="fs_FOpen"><h1>fs_FOpen</h1><h3>syscall Adress 020238</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td> HL points to file name<br>
- A file open mode</td><td> open a file and return a handle</td><td> - C flag set if failed<br>
- A open mode flags that couldn't be applied to the file (only if C flag set)<br>
- A file handle (only if C flag not set)</td><td></td></tr>
+ A = file open mode</td><td> open a file and return a handle</td><td> C flag set if failed<br>
+ A = file handle if success</td><td> All</td></tr>
 </table></div><div id="fs_FRead"><h1>fs_FRead</h1><h3>syscall Adress 02023C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A = file handle<br>
+ DE = data buffer<br>
+ HL = bytes to read</td><td> read data from a file into a buffer</td><td> HL = number of bytes read<br>
+ Z flag set if success, else failed</td><td> All</td></tr>
 </table></div><div id="fs_FWrite"><h1>fs_FWrite</h1><h3>syscall Adress 020240</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-</table></div><div id="fs_FTell"><h1>fs_FTell</h1><h3>syscall Adress 020244</h3>
+<tr><td> A = file handle<br>
+ DE = data buffer<br>
+ HL = write length</td><td> write a buffer into a file</td><td> Z flag if success, else failed<br>
+ C flag if not enough memory or file too large</td><td> All</td></tr>
+</table></div>@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i><div id="fs_FTell"><h1>fs_FTell</h1><h3>syscall Adress 020244</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 </table></div><div id="fs_FSeek"><h1>fs_FSeek</h1><h3>syscall Adress 020248</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>

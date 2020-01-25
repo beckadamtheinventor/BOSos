@@ -395,8 +395,6 @@ namespace bos
 ?kb_AnyKey                       := $20134
 ?sys_GetKey                      := $20138
 ?sys_WaitKey                     := $2013C
-?sys_AddHLAndMltBC               := $20140
-?sys_AddHLAndASectors            := $20144
 ;
 ;;-------------------------------------------------------------------------------
 ;; string functions
@@ -464,8 +462,8 @@ namespace bos
 ?ScrapWord              := ScrapByte+1
 ?lcd_x                  := ScrapWord+3
 ?lcd_y                  := lcd_x+3
-?next_free_RAM          := _InputBuffer+257
-?open_files_table       := next_free_RAM+3
+?free_RAM_ptr           := _InputBuffer+257
+?open_files_table       := free_RAM_ptr+3
 ?free_VAT_entry_ptr     := open_files_table+256
 ?first_VAT_section      := free_VAT_entry_ptr+3
 

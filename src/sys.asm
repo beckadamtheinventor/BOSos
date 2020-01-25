@@ -218,6 +218,46 @@ sys_MemSet:
 	ldir
 	ret
 
+;@DOES Allocate memory
+;@INPUT HL = number of bytes to malloc
+;@OUTPUT DE = malloc'd bytes
+;@OUTPUT C flag set if failed
+;@DESTROYS AF,DE
+sys_Malloc:
+	ld de,(remaining_free_RAM)
+	or a,a
+	ex hl,de
+	sbc hl,de
+	ret c
+	ld (remaining_free_RAM),hl
+	ld hl,(free_RAM_ptr)
+	ld (hl),de
+	inc hl
+	inc hl
+	inc hl
+	ex hl,de
+	add hl,de
+	ld (free_RAM_ptr),hl
+	or a,a
+	ret
+
+;@DOES Free a block of memory returned by sys_Malloc
+;@INPUT HL = memory to free
+;@DESTROYS AF,DE
+sys_Free:
+	dec hl
+	dec hl
+	dec hl
+	ld de,(hl)
+	push de
+	ld de,0
+	ld (hl),de
+	pop de
+	inc hl
+	inc hl
+	inc hl
+	ld (hl),de
+	ret
 
 ;@DOES HL+=A
 ;@INPUT HL number
@@ -231,32 +271,6 @@ sys_AddHLAndA:
 	add	hl,bc
 	pop bc
 	ret
-
-;@DOES HL+=B*C, saves BC
-;@INPUT HL number
-;@INPUT B increment_1
-;@INPUT C increment_2
-;@OUTPUT HL number + increment_1 * increment_2
-;@DESTROYS AF
-sys_AddHLAndMltBC:
-	push bc
-	mlt bc
-	add hl,bc
-	pop bc
-	ret
-
-;@DOES HL+=256*A, saves BC
-;@INPUT A number of sectors
-;@OUTPUT HL HL + 256 * A
-;@DESTROYS AF
-sys_AddHLAndASectors:
-	push bc
-	ld bc,0
-	ld b,a
-	add hl,bc
-	pop bc
-	ret
-
 
 ;@DOES find length of null-terminated string
 ;@INPUT HL pointer to string
@@ -297,7 +311,7 @@ str_set:
 ;@OUTPUT DE DE+HL+strlen(HL)
 ;@OUTPUT BC BC-strlen(HL)
 ;@DESTROYS AF
-str_copy:
+str_cpy:
 	xor a,a
 	ld bc,0
 .loop:

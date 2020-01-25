@@ -19,8 +19,8 @@ table:
 	jp kb_AnyKey
 	jp sys_GetKey
 	jp sys_WaitKey
-	jp sys_AddHLAndMltBC
-	jp sys_AddHLAndASectors
+	jp DONOTHING
+	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
