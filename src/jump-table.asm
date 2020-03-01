@@ -84,16 +84,16 @@ table:
 ;-------------------------------------------------------------------------------
 ; VAT and FS functions
 ;-------------------------------------------------------------------------------
-	jp sys_BuildVAT
-	jp sys_FindSym
-	jp sys_CreateFile
-	jp fs_FGetC
-	jp fs_FPutC
-	jp fs_FOpen
-	jp fs_FRead
-	jp fs_FWrite
-	jp fs_FTell
-	jp fs_FSeek
+	jp fs_BuildVAT
+	jp fs_FindSym
+	jp fs_CreateFile
+	jp fs_GetC
+	jp fs_PutC
+	jp fs_Open
+	jp fs_Read
+	jp fs_Write
+	jp fs_Tell
+	jp fs_Seek
 	jp fs_Delete
 	jp DONOTHING
 	jp DONOTHING
@@ -122,7 +122,7 @@ table:
 ;-------------------------------------------------------------------------------
 	jp gfx_Set8bpp
 	jp gfx_Set16bpp
-	jp DONOTHING
+	jp gfx_InitStdPalette
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING

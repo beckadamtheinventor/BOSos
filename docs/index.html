@@ -256,11 +256,16 @@
  C flag if not enough memory or file too large</td><td> All</td></tr>
 </table></div>@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i><div id="fs_FTell"><h1>fs_FTell</h1><h3>syscall Adress 020244</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
+<tr><td> A = file handle</td><td> get the tell of a file handle</td><td> HL = file tell</td><td> AF,BC,IX</td></tr>
 </table></div><div id="fs_FSeek"><h1>fs_FSeek</h1><h3>syscall Adress 020248</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-</table></div><div id="fs_Delete"><h1>fs_Delete</h1><h3>syscall Adress 02024C</h3>
+<tr><td> A = file handle<br>
+ HL = offset or new tell<br>
+ C = seek mode</td><td> set the tell of a file handle</td><td></td><td> All</td></tr>
+</table></div>@NOTE acceptable seek mode values: seek from (0: start, 1: current, 2: end). Higher values will have the same effect as 2.<div id="fs_Delete"><h1>fs_Delete</h1><h3>syscall Adress 02024C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
-</table></div><div id="gfx_Set8bpp"><h1>gfx_Set8bpp</h1><h3>syscall Adress 0202A4</h3>
+<tr><td> HL = file name</td><td> mark a file for deletion</td><td> carry flag is set if failed.</td><td></td></tr>
+</table></div>@NOTE you can do this in software by resetting the fs_exists bit of a VAT entry's flag byte.<div id="gfx_Set8bpp"><h1>gfx_Set8bpp</h1><h3>syscall Adress 0202A4</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>
 <tr><td></td><td> set the lcd to 8bpp mode</td><td></td><td> all</td></tr>
 </table></div><div id="gfx_Set16bpp"><h1>gfx_Set16bpp</h1><h3>syscall Adress 0202A8</h3>

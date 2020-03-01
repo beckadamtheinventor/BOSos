@@ -39,8 +39,15 @@ lcd_y                  := lcd_x+3
 _InputBuffer           := lcd_y+1
 
 free_RAM_ptr           := _InputBuffer+257
-open_files_table       := free_RAM_ptr+3
+remaining_free_RAM     := free_RAM_ptr+3
+gfx_string_temp        := remaining_free_RAM+3
+open_files_table       := gfx_string_temp+16
 free_VAT_entry_ptr     := open_files_table+256
 first_VAT_section      := free_VAT_entry_ptr+3
+
+
+start_of_user_archive  := $100000 ;sector $10, gives OS plenty of room
+
+
 
 

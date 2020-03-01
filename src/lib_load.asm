@@ -7,7 +7,7 @@
 dynamic_lib_load:
 	push de
 	ld de,(free_RAM_ptr)
-	call fs_Read
+	call fs_FRead
 	ld (free_RAM_ptr),de
 	pop de
 	scf

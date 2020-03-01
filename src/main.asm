@@ -1,3 +1,4 @@
+include 'include/ti84pceg.inc'
 include 'include/ez80.inc'
 include 'include/tiformat.inc'
 format ti executable 'BOSOS'

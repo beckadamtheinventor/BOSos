@@ -1,0 +1,17 @@
+;VAT structure:
+; Each file:
+;  1b file & entry flags             +0
+;  8b file name, 3b file extension   +1,+9
+;  3b file pointer                   +12
+;  3b file size                      +15
+; End of VAT section has the first byte of the file name set to 0xFF, followed by a 3b pointer to the next VAT section
+; If that pointer is null, we are at the end of the VAT.
+
+
+;file handle table structure:
+; Each handle:
+;  1b open flags
+;  3b file tell
+;  3b file VAT pointer
+;  1b reserved for future use
+

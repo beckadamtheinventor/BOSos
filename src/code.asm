@@ -16,64 +16,20 @@ handle_rst30:
 	jp	$3ac
 
 ;-------------------------------------------------------------------------------
-setup:
-; setup common items
-	ld	a,$27
-	ld	(LCD_CTRL),a
-	ld	de,LCD_PAL  ; address of mmio palette
-	ld	b,e         ; b = 0
-.loop:
-	ld	a,b
-	rrca
-	xor	a,b
-	and	a,224
-	xor	a,b
-	ld	(de),a
-	inc	de
-	ld	a,b
-	rla
-	rla
-	rla
-	ld	a,b
-	rra
-	ld	(de),a
-	inc	de
-	inc	b
-	jr	nz,.loop		; loop for 256 times to fill palette
-	ret
+setup:=gfx_initStdPalette
+
 
 ;-------------------------------------------------------------------------------
 os_setup:
 	ld hl,data_font_data
-	ld de,data_font_spacing
-	call gfx_LoadFont
+	ld (font_data),hl
+	ld hl,data_font_spacing
+	ld (font_spacing),hl
 	xor a,a
 	ld (lcd_text_bg),a
 	call gfx_BufClear
-	ld a,$FF
+	dec a
 	ld (lcd_text_fg),a
-	ld a,12
-	ld (lcd_y),a
-	or a,a
-	sbc hl,hl
-	ld (lcd_x),hl
-	ld hl,data_strings.hello_world
-	call gfx_PutS
-	call gfx_NextLine
-	ld hl,data_strings.welcome_to_bos
-	call gfx_PutS
-	call gfx_NextLine	
-	ld hl,data_strings.happy_emoji
-	call gfx_PutS
-	call gfx_NextLine
-	ld hl,_InputBuffer
-	push hl
-	pop de
-	inc de
-	xor a,a
-	ld (hl),a
-	ld bc,256
-	ldir
 	jp gfx_BlitBuffer
 
 ;-------------------------------------------------------------------------------
@@ -84,7 +40,7 @@ intro_completed:=$-1
 	call nz,intro_main
 	ld a,$BF
 	call gfx_BufClear
-	
+	call gfx_BlitBuffer
 .loop:
 	call sys_GetKey
 	jr .loop

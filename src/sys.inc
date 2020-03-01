@@ -339,15 +339,15 @@ str_n_cpy:
 	ret
 
 
-;@DOES convert a string to uppercase
-;@INPUT HL pointer to string
-;@OUTPUT HL HL+strlen(HL)
-;@DESTROYS AF
-str_upper:
+_str_upper:
 .loop:
 	ld (hl),a
 .next:
 	inc hl
+;@DOES convert a string to uppercase
+;@INPUT HL pointer to string
+;@OUTPUT HL HL+strlen(HL)
+;@DESTROYS AF
 str_upper:
 	ld a,(hl)
 	or a,a
@@ -358,15 +358,15 @@ str_upper:
 	add a,'A'
 	jr _str_upper.loop
 
-;@DOES convert a string to lowercase
-;@INPUT HL pointer to string
-;@OUTPUT HL HL+strlen(HL)
-;@DESTROYS AF
-str_lower:
+_str_lower:
 .loop:
 	ld (hl),a
 .next:
 	inc hl
+;@DOES convert a string to lowercase
+;@INPUT HL pointer to string
+;@OUTPUT HL HL+strlen(HL)
+;@DESTROYS AF
 str_lower:
 	ld a,(hl)
 	or a,a
