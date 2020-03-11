@@ -29,6 +29,34 @@ data_key_map_2:
 	db '0147,[{',0
 	db 0,$1A,"<=>\\'"
 
+os_config_file_dir:=os_root_dir
+os_config_file:
+	db fs_system+fs_read+fs_exists,'config',0,0,'dat'
+os_root_dir:
+	db fs_system+fs_dir+fs_read+fs_exists, 'sys',0,0,0,0,0,   'dir'
+	dl 0,0
+	db fs_system+fs_dir+fs_read+fs_exists, 'config',0,0,     'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'home',0,0,0,0,   'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'share',0,0,0,0,  'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'bin',0,0,0,0,0,  'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'lib',0,0,0,0,0,  'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'usr',0,0,0,0,0,  'dir'
+	dl 0,0
+	db fs_dir+fs_read+fs_write+fs_exists,  'tmp',0,0,0,0,0,  'dir'
+	dl 0,0
+	db $FF,$FF,$FF,$FF
+.len:=$-os_root_dir
+
+defaultflags:
+	db $BF,$00,$BF,$00
+	dl data_font_spacing,data_font_data
+	dl 0,0,0,0,0,0
+	db 0,0,0,0,0,0
 
 data_strings:
 .hello_world:
@@ -40,5 +68,5 @@ data_strings:
 .lets_start:
 	db "Let's Start!",0
 
-;-------------------------------------------------------------------------------
+
 

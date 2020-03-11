@@ -1,5 +1,5 @@
 ;@DOES copies the back buffer to the lcd
-;@DESTROYS all except A
+;@DESTROYS HL,DE,BC
 gfx_BlitBuffer:
 	ld	hl,LCD_BUFFER
 	ld	de,LCD_VRAM

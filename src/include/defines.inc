@@ -1,8 +1,3 @@
-;-------------------------------------------------------------------------------
-; RAM defines
-;-------------------------------------------------------------------------------
-
-RAM_START  := 0D00000h
 
 ;-------------------------------------------------------------------------------
 ; LCD defines
@@ -17,37 +12,74 @@ LCD_HEIGHT := 240
 LCD_8BPP   := $27
 LCD_16BPP  := $2D
 
+TEXT_MAX_ROW    := 231
+
 ;-------------------------------------------------------------------------------
 ; OS defines
 ;-------------------------------------------------------------------------------
-TEXT_MAX_ROW           := 231
 
-_SaveData              := RAM_START+6
-_TextShadow            := _SaveData+32
-_TextShadow_numcols    := 27
-_TextShadow_numlines   := 10
-_TextShadow_len        := 270  ;need null afer every line
-lcd_text_fg            := _TextShadow+_TextShadow_len
-lcd_text_bg            := lcd_text_fg+1
-font_spacing           := lcd_text_bg+1
-font_data              := font_spacing+3
-color_primary          := font_data+3
-ScrapByte              := color_primary+1
-ScrapWord              := ScrapByte+1
-lcd_x                  := ScrapWord+3
-lcd_y                  := lcd_x+3
-_InputBuffer           := lcd_y+1
+RAM_START  := 0D00400h
 
-free_RAM_ptr           := _InputBuffer+257
-remaining_free_RAM     := free_RAM_ptr+3
-gfx_string_temp        := remaining_free_RAM+3
-open_files_table       := gfx_string_temp+16
-free_VAT_entry_ptr     := open_files_table+256
-first_VAT_section      := free_VAT_entry_ptr+3
+; iy flags
+flags                   := $D00080
+namespace flags
+sys_flags              := -1
+lcd_bg_color           :=  0
+text_fg                :=  1
+text_bg                :=  2
+color_primary          :=  3
+font_spacing           :=  4
+font_data              :=  7
+lcd_x                  :=  10
+lcd_y                  :=  13
+free_RAM_ptr           :=  16
+remaining_free_RAM     :=  19
+free_VAT_entry_ptr     :=  22
+cursor_x               :=  25
+cursor_y               :=  28
+cursor_flags           :=  29
+lcd_text_fg            :=  30
+lcd_text_bg            :=  31
+cursor_color           :=  32
+end namespace
+
+; bos_sys_flags flag bits
+bos_read_only_fs        := 1
+
+; cursor_flags flag bits
+cursor_2nd              := 1
 
 
-start_of_user_archive  := $100000 ;sector $10, gives OS plenty of room
+; iy flag memory locations
+flag_start             := $D00000
+sys_flags              := $D0007F
+lcd_bg_color           := $D00080
+text_fg                := $D00081
+text_bg                := $D00082
+color_primary          := $D00083
+font_spacing           := $D00084
+font_data              := $D00087
+lcd_x                  := $D0008A
+lcd_y                  := $D0008D
+free_RAM_ptr           := $D00090
+remaining_free_RAM     := $D00093
+free_VAT_entry_ptr     := $D00096
+lcd_text_fg            := $D00097
+lcd_text_bg            := $D00098
+cursor_color           := $D00099
+ScrapByte              := $D000FC
+ScrapWord              := $D000FD
+ScrapMem               := $D000FD
 
+; other RAM locations
+open_files_table       := $D00100
+InputBuffer            := $D00200
+gfx_string_temp        := $D00300
+
+
+; Flash locations
+start_of_user_archive  := $0C0000 ;sector $0C, standard
+end_of_user_archive    := $3B0000 ;sector $3B, start of certificate
 
 
 

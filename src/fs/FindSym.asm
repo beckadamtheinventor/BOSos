@@ -1,41 +1,60 @@
 ;@DOES search the VAT for a file
 ;@INPUT HL points to file name
-;@OUTPUT DE points to VAT entry
+;@INPUT DE = directory pointer. If this points to null, this function will search root.
+;@OUTPUT IX and DE point to VAT entry
 ;@OUTPUT C flag is set if failed
-;@DESTROYS AF,BC
-;@NOTE saves HL
+;@DESTROYS DE,BC,AF
 fs_FindSym:
+	ld (ScrapWord),hl
+	ld a,(de)
+	or a,a
+	jr z,.root
 	ex hl,de
-	ld hl,first_VAT_section ;first file name
+	bit fs_dir_bit,a
+	jr z,.entry         ;if the VAT entry is a file
+	ld bc,fs_vat_ptr    ;otherwise go to the directory's files
+	ex hl,de
+	add hl,bc
+	ld hl,(hl)
+	jr .entry           
+.root:
+	ld hl,os_root_dir
 	jr .entry
-.loop:
-	push hl ;save the current VAT pointer
-	push de ;save the file name we're looking for
-	ld bc,11 ;maximum file name length
-	call str_n_cmp
-	pop hl
-	pop de
-	ret z
+.outer:
 	ex hl,de
-	ld c,16 ;B and BCU should already be 0
+	ld hl,(hl)
+.loop:
+	ld a,(hl)
+	bit fs_exists_bit,a
+	jr nz,.next
+	push hl ;save the current VAT pointer
+	inc hl  ;skip the flag byte
+	ld de,(ScrapWord)
+	ld bc,11
+	call memcmp
+	pop hl
+	jr z,.success
+.next:
+	ld bc,18 ;size of a VAT entry
 	add hl,bc
 .entry:
 	ld a,(hl) ;check if we're at the end of this VAT section
 	inc a
 	jr nz,.loop
 	inc hl
-	ld de,(hl) ;check if we're at the end of the VAT
+	ld bc,(hl) ;check if we're at the end of the VAT
 	ex hl,de
+	ld hl,-1
 	or a,a
 	sbc hl,bc
-	adc hl,bc
-	jr z,.fail
-	inc de
-	inc de
-	inc de
-	jr .loop
+	jr nz,.outer
 .fail:
-	pop hl
 	scf
+	ret
+.success:
+	ex hl,de
+	push de
+	pop ix
+	ld hl,(ScrapWord)
 	ret
 

@@ -2,12 +2,13 @@
 ;@INPUT HL number to display
 ;@INPUT A characters to use (8-nchars)
 ;@OUTPUT string stored at gfx_string_temp
+;@DESTROYS HL,DE,BC,AF
 gfx_PrintUInt:
 	dec	a
-	push	af
-	call	util_num_convert
+	ld (ScrapByte),a
+	call	sys_HLToString
 	ex	de,hl
-	pop	af
+	ld a,(ScrapByte)
 	call	sys_AddHLAndA
-	jp	lcd_string
+	jp	gfx_PrintString
 

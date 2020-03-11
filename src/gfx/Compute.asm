@@ -2,7 +2,7 @@
 ;@INPUT HL X coordinate
 ;@INPUT E Y coordinate
 ;@OUTPUT HL pointer to draw location
-;@DESTROYS AF, DE
+;@DESTROYS HL,DE
 gfx_Compute:
 	ld	d,LCD_WIDTH / 2
 	mlt	de

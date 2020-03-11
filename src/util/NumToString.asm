@@ -1,8 +1,9 @@
 ;@DOES convert a number to a string
-;@INPUT HL number to convert
+;@INPUT HL = number to convert
+;@OUTPUT DE = string
 ;@OUTPUT string stored at gfx_string_temp
+util_NumToString:
 sys_HLToString:
-util_NumConvert:
 	ld	de,gfx_string_temp
 	push	de
 	call	.entry

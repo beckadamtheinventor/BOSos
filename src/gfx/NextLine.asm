@@ -1,5 +1,5 @@
 ;@DOES moves the text position 9 rows ahead, and moves the collumn to zero.
-;@DESTROYS HL,A
+;@DESTROYS HL,AF
 gfx_NextLine:
 	or a,a
 	sbc hl,hl

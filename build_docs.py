@@ -11,9 +11,13 @@ def myhex(n):
 		n//=16
 	return "".join(l)
 
-def myfinder(df):
-	for fname in next(os.fwalk("src"))[2]:
-		with open("src/"+fname) as fp:
+def myfinder(d,df):
+	fw=next(os.fwalk(d))
+	for fname in fw[1]:
+		dt,ix = myfinder(d+"/"+fname,df)
+		if len(dt): return dt,ix
+	for fname in fw[2]:
+		with open(d+"/"+fname) as fp:
 			dt=fp.read().splitlines()
 		for ix in range(len(dt)):
 			if dt[ix]==df:
@@ -51,12 +55,15 @@ th,tr,td{
 	border-left: 1px solid white;
 	border-top: 1px solid white;
 }
+th,td{
+	width: 20%;
+}
 table{
 	border-right: 1px solid white;
 	border-bottom: 1px solid white;
 	position: relative;
-	left: 10%;
-	width: 80%;
+	left: 2%;
+	width: 96%;
 }
 .no_op{
 	color: #C02020;
@@ -99,9 +106,9 @@ with open("docs/index.html","w") as f:
 					f.write("<tr>")
 					f2.write("<div id=\""+line+"\"><h1>"+line+"</h1>\
 <h3>syscall Adress "+myhex(counter)+"</h3>\n")
-					f2.write("<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th>\n")
+					f2.write("<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>\n")
 					a=[]; b=[]; c=[]; d=[]
-					dt,ix=myfinder(line+":")
+					dt,ix=myfinder("src",line+":")
 					if ix:
 						try:
 							while not dt[ix].startswith(";@DOES"):
@@ -119,19 +126,18 @@ with open("docs/index.html","w") as f:
 									elif t.startswith("@DESTROYS"):
 										d.append(t.replace("@DESTROYS","").replace("\\n","<br>\n"))
 									elif t.startswith("@NOTE"):
-										e.append(t.replace("@DESTROYS","").replace("\\n","<br>\n"))
+										e.append(t.replace("@NOTE","").replace("\\n","<br>\n"))
 									elif dt[ix][0]==";":
 										pass
 									else:
 										break
 								ix+=1
 							f2.write("<tr><td>"+("<br>\n".join(a))+"</td><td>"+("<br>\n".join(b))+"</td><td>"+("<br>\n".join(c))+\
-								"</td><td>"+("<br>\n".join(d))+"</td></tr>\n")
-							a.clear(); b.clear(); c.clear(); d.clear()
+								"</td><td>"+("<br>\n".join(d))+"</td><td>\n"+("<br>\n".join(e))+"</td></tr>\n")
+							a.clear(); b.clear(); c.clear(); d.clear(); e.clear()
 						except:
 							pass
 					f2.write("</table></div>")
-					f2.write("\n".join(e))
 					# if ix and ":" not in dt[ix]:
 						# f2.write("<div class=\"assembly\">\n")
 						# while len(dt[ix]):

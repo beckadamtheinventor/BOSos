@@ -15,6 +15,9 @@
 
 
 ; since we're an OS, we can use the in/out instructions
+
+;@DOES unlock flash
+;@DESTROYS AF,BC
 flash_unlock:
 	ld	bc,$24
 	ld	a,$8c
@@ -28,6 +31,8 @@ flash_unlock:
 	out (bc),a
 	ret
 
+;@DOES lock flash
+;@DESTROYS AF,BC
 flash_lock:
 	ld	bc,$28
 	xor	a,a

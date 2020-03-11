@@ -1,7 +1,6 @@
 
-
-
-; lcd handling routines for the pl1111
+; BOS graphics routines
+; Mostly taken from Cesium and refactored to run from flash
 
 include 'gfx/BlitBuffer.asm'
 include 'gfx/BufClear.asm'
@@ -19,5 +18,4 @@ include 'gfx/Set8bpp.asm'
 include 'gfx/Set16bpp.asm'
 include 'gfx/Sprite.asm'
 include 'gfx/VertLine.asm'
-
 

@@ -1,6 +1,6 @@
 ;@DOES print a string to the back buffer
 ;@INPUT HL pointer to string
-;@DESTROYS all
+;@DESTROYS HL,DE,BC,AF
 gfx_PrintString:
 	ld	a,(lcd_y)
 	cp	a,TEXT_MAX_ROW

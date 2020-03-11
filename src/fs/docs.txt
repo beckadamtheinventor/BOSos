@@ -10,8 +10,16 @@
 
 ;file handle table structure:
 ; Each handle:
-;  1b open flags
-;  3b file tell
-;  3b file VAT pointer
-;  1b reserved for future use
+;  1b open flags                     +0
+;  3b file tell                      +1
+;  3b file VAT pointer               +4
+;  1b reserved for future use        +7
+
+
+;File header, regardless of RAM/Arc:
+;  1b flags & entry flags
+;  8b file name, 3b extension
+;  3b pointer to parent directory
+;  3b file length
+;  ...data...
 

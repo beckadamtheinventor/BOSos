@@ -8,12 +8,15 @@ th,tr,td{
 	border-left: 1px solid white;
 	border-top: 1px solid white;
 }
+th,td{
+	width: 20%;
+}
 table{
 	border-right: 1px solid white;
 	border-bottom: 1px solid white;
 	position: relative;
-	left: 10%;
-	width: 80%;
+	left: 2%;
+	width: 96%;
 }
 .no_op{
 	color: #C02020;

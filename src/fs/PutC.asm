@@ -7,7 +7,7 @@
 ;@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i>
 fs_PutC:
 	push bc
-	call sys_GetFileHandlePtr
+	call fs_GetFileHandlePtr
 	ld a,(ix)
 	bit fs_write_bit,a
 	jr z,.failed

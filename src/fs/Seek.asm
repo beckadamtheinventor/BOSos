@@ -7,7 +7,7 @@
 fs_Seek:
 	push hl
 	push bc
-	call sys_GetFileHandlePtr
+	call fs_GetFileHandlePtr
 	pop bc
 	pop hl
 	ld iy,(ix+4) ;VAT pointer

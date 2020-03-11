@@ -11,15 +11,13 @@ fs_MoveFileToArc:
 	ld hl,(iy+15) ; file size
 	push hl
 	call fs_FindFreeArcSpot
-	jr c,.failed
-	call flash_unlock
 	pop bc
-;!!!!!!--FIX THIS--!!!!!!!
-;	ld hl,(iy+12) ; file data pointer
-;	ld (iy+12),de
-;	ldir
-;	res fs_RAM,(ix)
-	call flash_lock
+	jr c,.failed
+	push de
+	call sys_WriteFlash
+	pop de
+	res fs_RAM,(ix)
+	ld (ix+4),de
 	xor a,a
 	ret
 .inarc:

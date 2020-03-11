@@ -1,6 +1,6 @@
 ;@DOES clears the lcd
 ;@INPUT A color to fill with
-;@DESTROYS all except A
+;@DESTROYS HL,DE,BC,F(P/V)
 gfx_LcdClear:
 	ld	hl,LCD_VRAM
 	ld	bc,LCD_WIDTH * LCD_HEIGHT - 1

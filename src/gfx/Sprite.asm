@@ -1,7 +1,7 @@
 ;@DOES draws a sprite to the back buffer
 ;@INPUT HL pointer to sprite
 ;@INPUT BC X<<8 + Y
-;@DESTROYS all
+;@DESTROYS HL,DE,BC,AF
 gfx_Sprite:
 	push	hl
 	or	a,a
@@ -20,19 +20,22 @@ gfx_Sprite:
 	ld	a,(hl)
 	ld	(ScrapByte),a			; width
 	inc	hl
-	ld	a,(hl)				; height
+	ld	a,(hl)
+	ld (ScrapWord),a            ; height
 	inc	hl
-	ld	ix,0
 .loop:
-	push af
 	ld a,(ScrapByte)
-	ld	c,a
-	pop af
-	add	ix,de
-	lea	de,ix
+	ld c,a
+	push de
 	ldir
+	ld	hl,ScrapWord
+	dec (hl) ; for height
+	ld a,(hl)
 	ld	de,LCD_WIDTH
-	dec	a				; for height
+	pop hl
+	add hl,de
+	ex hl,de
+	or a,a
 	jr	nz,.loop
 	ret
 

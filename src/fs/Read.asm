@@ -8,7 +8,7 @@
 fs_Read:
 	push de
 	push hl
-	call sys_GetFileHandlePtr
+	call fs_GetFileHandlePtr
 	bit fs_read_bit,(ix)
 	jr z,.failed
 	ld iy,(ix+4)  ; VAT pointer

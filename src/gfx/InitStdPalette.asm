@@ -1,6 +1,6 @@
 
 ;@DOES Initialise the standard (8bpp) XLibC palette
-;@DESTROYS AF,BC,DE
+;@DESTROYS DE,BC,AF
 gfx_InitStdPalette:
 ; setup common items
 	ld	a,$27

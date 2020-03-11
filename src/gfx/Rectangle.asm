@@ -3,7 +3,7 @@
 ;@INPUT HL rectangle X coordinate
 ;@INPUT E rectangle Y coordinate
 ;@INPUT D rectangle height
-;@DESTROYS all
+;@DESTROYS HL,DE,BC,AF
 gfx_Rectangle:
 .computed:
 	ld	a,(color_primary)		; always use primary color
@@ -17,8 +17,8 @@ gfx_Rectangle:
 	pop	bc
 	pop	hl
 	ld	e,c
-	call	gfx_Vertline			; right vertical line
+	call	gfx_VertLine			; right vertical line
 	pop	bc
-	jr	gfx_HorizLine.computed		; bottom horizontal line
+	jp	gfx_HorizLine.computed		; bottom horizontal line
 
 

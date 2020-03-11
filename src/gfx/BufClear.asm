@@ -1,6 +1,6 @@
 ;@DOES clears the back buffer
 ;@INPUT A color to fill with
-;@DESTROYS all except A
+;@DESTROYS HL,DE,BC,F(P/V)
 gfx_BufClear:
 	ld	hl,LCD_BUFFER
 	ld	bc,LCD_WIDTH * LCD_HEIGHT - 1

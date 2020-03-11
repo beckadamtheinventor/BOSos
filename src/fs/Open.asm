@@ -9,7 +9,7 @@ fs_Open:
 	ret z ; no open mode flags set
 	ld c,a
 	push bc
-	call sys_FindSym
+	call fs_FindSym
 	pop bc
 	jr c,.does_not_exist
 	ld a,c
@@ -17,15 +17,20 @@ fs_Open:
 	bit fs_read_bit,a
 	jr z,.checkwrite
 .tryread:
-	bit fs_read_bit,c
+	bit fs_read_bit,(ix)
 	jr z,.fail
+	bit fs_write_bit,a
+	jr nz,.checkcanwrite
+	jr .wecanopen
 .checkwrite:
 	bit fs_write_bit,a
 	jr z,.fail
-	bit fs_write_bit,c
+.checkcanwrite:
+	bit fs_write_bit,(ix)
 	jr z,.fail
 .wecanopen:
 	call fs_NextAvalibleFileSlot
+	jr nz,.fail
 	ld a,(ix)
 	and a,fs_open_mode_mask
 .write_handle:
@@ -42,9 +47,10 @@ fs_Open:
 	ld a,c
 	ret
 .does_not_exist:
-	bit fs_write_bit,c
+	bit fs_write_bit,(ix)
 	jr z,.fail
 	call fs_CreateFile
+	ret c
 	call fs_NextAvalibleFileSlot
 	jr z,.write_handle
 .fail:

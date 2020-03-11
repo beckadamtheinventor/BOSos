@@ -1,5 +1,5 @@
 ;@DOES set the lcd to 16bpp mode
-;@DESTROYS all
+;@DESTROYS HL,DE,BC,AF
 gfx_Set16bpp:
 	ld	hl,LCD_VRAM
 	ld	bc,((LCD_WIDTH * LCD_HEIGHT) * 2) - 1

@@ -41,7 +41,9 @@ namespace bos
 			line=line[line.find("jp ")+3:]
 			if ";" in line:
 				line=line[:line.find(";")]
-			if line!="DONOTHING":
+			if line=="DONOTHING":
+				f.write(";DONOTHING                       := $"+myhex(counter)+"\n")
+			else:
 				f.write("?"+line.ljust(32," ")+(":= $"+myhex(counter))+"\n")
 			counter+=4
 		else:

@@ -9,7 +9,7 @@
 fs_Write:
 	push de
 	push hl
-	call sys_GetFileHandlePtr
+	call fs_GetFileHandlePtr
 	ld a,(ix)
 	bit fs_write_bit,a
 	jr z,.failed

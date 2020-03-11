@@ -6,7 +6,7 @@
 ;@DESTROYS All
 ;@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i>
 fs_GetC:
-	call sys_GetFileHandlePtr
+	call fs_GetFileHandlePtr
 	bit fs_read_bit,(ix)
 	jr z,.failed
 	ld iy,(ix+4)  ; VAT pointer

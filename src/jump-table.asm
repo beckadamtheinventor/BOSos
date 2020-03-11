@@ -28,10 +28,10 @@ table:
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
-	jp DONOTHING
-	jp DONOTHING
-	jp DONOTHING
-	jp DONOTHING
+	jp flash_unlock
+	jp flash_lock
+	jp sys_WriteFlash
+	jp sys_EraseFlashSector
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
@@ -48,14 +48,14 @@ table:
 ;-------------------------------------------------------------------------------
 ; string functions
 ;-------------------------------------------------------------------------------
-	jp str_len
-	jp str_set
-	jp str_cpy
-	jp str_cmp
-	jp str_upper
-	jp str_lower
-	jp str_n_cpy
-	jp str_n_cmp
+	jp strlen
+	jp strset
+	jp strcpy
+	jp strcmp
+	jp strupper
+	jp strlower
+	jp strncpy
+	jp strncmp
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
@@ -126,7 +126,7 @@ table:
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
-	jp gfx_PutS
+	jp gfx_PrintString
 	jp gfx_LcdClear
 	jp gfx_BufClear
 	jp gfx_BlitBuffer
@@ -137,7 +137,7 @@ table:
 	jp gfx_Rectangle
 	jp gfx_FillRectangle
 	jp gfx_Sprite
-	jp gfx_PutC
+	jp gfx_PrintChar
 	jp gfx_NextLine
 	jp DONOTHING
 	jp DONOTHING
