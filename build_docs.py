@@ -20,7 +20,7 @@ def myfinder(d,df):
 		with open(d+"/"+fname) as fp:
 			dt=fp.read().splitlines()
 		for ix in range(len(dt)):
-			if dt[ix]==df:
+			if dt[ix].startswith(df):
 				return dt,ix
 	return [],0
 

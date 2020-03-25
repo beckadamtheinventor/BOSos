@@ -1,12 +1,13 @@
 ;@DOES read a character from a file
 ;@INPUT A = file handle
 ;@OUTPUT C = character
-;@OUTPUT C flag set if EOF reached
+;@OUTPUT C flag set if EOF reached or file slot invalid
 ;@OUTPUT Z flag set if success, else failed
 ;@DESTROYS All
 ;@NOTE when checking the return of this call, make sure to check the Carry flag <i>first</i>
 fs_GetC:
 	call fs_GetFileHandlePtr
+	jr nc,.failed
 	bit fs_read_bit,(ix)
 	jr z,.failed
 	ld iy,(ix+4)  ; VAT pointer

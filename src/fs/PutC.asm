@@ -8,6 +8,7 @@
 fs_PutC:
 	push bc
 	call fs_GetFileHandlePtr
+	jr nc,.failed
 	ld a,(ix)
 	bit fs_write_bit,a
 	jr z,.failed

@@ -67,6 +67,7 @@ free_VAT_entry_ptr     := $D00096
 lcd_text_fg            := $D00097
 lcd_text_bg            := $D00098
 cursor_color           := $D00099
+ScrapMem2              := $D000F9
 ScrapByte              := $D000FC
 ScrapWord              := $D000FD
 ScrapMem               := $D000FD

@@ -133,6 +133,38 @@
 <tr class="no_op"><td>bos.DONOTHING</td><td>020318</td><td><a href="#DONOTHING">doc</a></tr>
 <tr class="no_op"><td>bos.DONOTHING</td><td>02031C</td><td><a href="#DONOTHING">doc</a></tr>
 <tr class="no_op"><td>bos.DONOTHING</td><td>020320</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.c_CloseAll</td><td>020324</td><td><a href="#c_CloseAll">doc</a></tr>
+<tr><td>bos.c_Open</td><td>020328</td><td><a href="#c_Open">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02032C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.c_Close</td><td>020330</td><td><a href="#c_Close">doc</a></tr>
+<tr><td>bos.c_Read</td><td>020334</td><td><a href="#c_Read">doc</a></tr>
+<tr><td>bos.c_Write</td><td>020338</td><td><a href="#c_Write">doc</a></tr>
+<tr><td>bos.c_GetC</td><td>02033C</td><td><a href="#c_GetC">doc</a></tr>
+<tr><td>bos.c_PutC</td><td>020340</td><td><a href="#c_PutC">doc</a></tr>
+<tr><td>bos.c_Delete</td><td>020344</td><td><a href="#c_Delete">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020348</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.c_Seek</td><td>02034C</td><td><a href="#c_Seek">doc</a></tr>
+<tr><td>bos.c_Resize</td><td>020350</td><td><a href="#c_Resize">doc</a></tr>
+<tr><td>bos.c_IsArchived</td><td>020354</td><td><a href="#c_IsArchived">doc</a></tr>
+<tr><td>bos.c_SetArchiveStatus</td><td>020358</td><td><a href="#c_SetArchiveStatus">doc</a></tr>
+<tr><td>bos.c_Tell</td><td>02035C</td><td><a href="#c_Tell">doc</a></tr>
+<tr><td>bos.c_Rewind</td><td>020360</td><td><a href="#c_Rewind">doc</a></tr>
+<tr><td>bos.c_GetSize</td><td>020364</td><td><a href="#c_GetSize">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020368</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.DONOTHING   </td><td>02036C</td><td><a href="#DONOTHING   ">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020370</td><td><a href="#DONOTHING">doc</a></tr>
+<tr><td>bos.c_Rename</td><td>020374</td><td><a href="#c_Rename">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020378</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02037C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020380</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020384</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020388</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02038C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020390</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020394</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>020398</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>02039C</td><td><a href="#DONOTHING">doc</a></tr>
+<tr class="no_op"><td>bos.DONOTHING</td><td>0203A0</td><td><a href="#DONOTHING">doc</a></tr>
 </table><div id="handle_boot"><h1>handle_boot</h1><h3>syscall Adress 020108</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td></td><td></td><td></td><td></td><td>
@@ -205,6 +237,9 @@
 </td></tr>
 </table></div><div id="sys_WriteFlash"><h1>sys_WriteFlash</h1><h3>syscall Adress 02016C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> HL, DE, BC</td><td> write BC bytes to flash from HL to DE.</td><td></td><td></td><td>
+ flash must be unlocked prior to use<br>
+ this is a boot call</td></tr>
 </table></div><div id="sys_EraseFlashSector"><h1>sys_EraseFlashSector</h1><h3>syscall Adress 020170</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td> A sector to erase</td><td> Erase flash sector</td><td></td><td> All</td><td>
@@ -272,7 +307,7 @@
 </table></div><div id="fs_GetC"><h1>fs_GetC</h1><h3>syscall Adress 020230</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td> A = file handle</td><td> read a character from a file</td><td> C = character<br>
- C flag set if EOF reached<br>
+ C flag set if EOF reached or file slot invalid<br>
  Z flag set if success, else failed</td><td> All</td><td>
  when checking the return of this call, make sure to check the Carry flag <i>first</i></td></tr>
 </table></div><div id="fs_PutC"><h1>fs_PutC</h1><h3>syscall Adress 020234</h3>
@@ -284,7 +319,8 @@
 </table></div><div id="fs_Open"><h1>fs_Open</h1><h3>syscall Adress 020238</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td> HL points to file name<br>
- A = file open mode</td><td> open a file and return a handle</td><td> C flag set if failed<br>
+ A = file open mode<br>
+ DE points to directory</td><td> open a file and return a handle</td><td> C flag set if failed<br>
  A = file handle if success</td><td> All</td><td>
 </td></tr>
 </table></div><div id="fs_Read"><h1>fs_Read</h1><h3>syscall Adress 02023C</h3>
@@ -303,17 +339,21 @@
  when checking the return of this call, make sure to check the Carry flag <i>first</i></td></tr>
 </table></div><div id="fs_Tell"><h1>fs_Tell</h1><h3>syscall Adress 020244</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
-<tr><td> A = file handle</td><td> get the tell of a file handle</td><td> HL = file tell</td><td> AF,BC,IX</td><td>
+<tr><td> A = file handle</td><td> get the tell of a file handle</td><td> HL = file tell<br>
+ HL = -1 on fail</td><td> AF,BC,IX</td><td>
 </td></tr>
 </table></div><div id="fs_Seek"><h1>fs_Seek</h1><h3>syscall Adress 020248</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td> A = file handle<br>
  HL = offset or new tell<br>
- C = seek mode</td><td> set the tell of a file handle</td><td></td><td> All</td><td>
+ C = seek mode</td><td> set the tell of a file handle</td><td> HL = new file tell<br>
+ HL = -1 on fail</td><td> All</td><td>
  acceptable seek mode values: seek from (0: start, 1: current, 2: end). Higher values will have the same effect as 2.</td></tr>
 </table></div><div id="fs_Delete"><h1>fs_Delete</h1><h3>syscall Adress 02024C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
-<tr><td> HL = file name</td><td> mark a file for deletion</td><td> carry flag is set if failed.</td><td></td><td>
+<tr><td> HL = file name<br>
+ DE points to directory</td><td> mark a file for deletion</td><td> carry flag is set if failed.<br>
+ DE = file name</td><td> HL,DE,BC,AF</td><td>
  you can do this in software by resetting the fs_exists bit of a VAT entry's flag byte.</td></tr>
 </table></div><div id="gfx_Set8bpp"><h1>gfx_Set8bpp</h1><h3>syscall Adress 0202A4</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
@@ -391,5 +431,64 @@
 </table></div><div id="gfx_NextLine"><h1>gfx_NextLine</h1><h3>syscall Adress 0202EC</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td></td><td> moves the text position 9 rows ahead, and moves the collumn to zero.</td><td></td><td> HL,AF</td><td>
+</td></tr>
+</table></div><div id="c_CloseAll"><h1>c_CloseAll</h1><h3>syscall Adress 020324</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> void c_CloseAll(void);</td><td> C function for fs_CloseAll</td><td></td><td> HL,DE,BC,AF</td><td>
+</td></tr>
+</table></div><div id="c_Open"><h1>c_Open</h1><h3>syscall Adress 020328</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_FOpen(const char *file_name, uint8_t open_mode, dir_t *directory);</td><td> C function for fs_Open</td><td> A = file slot number</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_Close"><h1>c_Close</h1><h3>syscall Adress 020330</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> void c_Close(uint8_t handle);</td><td> C function for fs_Close</td><td></td><td> HL,DE,BC,AF</td><td>
+</td></tr>
+</table></div><div id="c_Read"><h1>c_Read</h1><h3>syscall Adress 020334</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_Read(void *buffer,int len,uint8_t count,uint8_t handle);</td><td> C function for fs_Read</td><td> HL = number of bytes read. zero if failed</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_Write"><h1>c_Write</h1><h3>syscall Adress 020338</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_Write(void *buffer,int len,uint8_t count,uint8_t handle);</td><td> C function for fs_Write</td><td> HL = number of bytes written. zero if failed</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_GetC"><h1>c_GetC</h1><h3>syscall Adress 02033C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_GetC(uint8_t handle);</td><td> C function for fs_GetC</td><td> on fail HL = -1<br>
+ on success HL = char</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_PutC"><h1>c_PutC</h1><h3>syscall Adress 020340</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_PutC(uint8_t char,uint8_t handle);</td><td> C function for fs_PutC</td><td> A = 0 if failed. Either file is too large or not enough memory</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_Delete"><h1>c_Delete</h1><h3>syscall Adress 020344</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_Delete(const char *file_name, dir_t *directory);</td><td> C function for fs_Delete</td><td> A = 0 if failed</td><td> All except IY</td><td>
+</td></tr>
+</table></div><div id="c_Seek"><h1>c_Seek</h1><h3>syscall Adress 02034C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_Seek(int offset,uint8_t whence,uint8_t handle);</td><td> C function for fs_Seek</td><td> HL = new file offset</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_Resize"><h1>c_Resize</h1><h3>syscall Adress 020350</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+</table></div><div id="c_IsArchived"><h1>c_IsArchived</h1><h3>syscall Adress 020354</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+</table></div><div id="c_SetArchiveStatus"><h1>c_SetArchiveStatus</h1><h3>syscall Adress 020358</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_SetArchiveStatus(uint8_t status, uint8_t handle);</td><td> C function for fs_MoveFileToArc and fs_MoveFileToRAM</td><td> A = 0 if failed or move is not required</td><td> All</td><td>
+</td></tr>
+</table></div><div id="c_Tell"><h1>c_Tell</h1><h3>syscall Adress 02035C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_Tell(uint8_t handle);</td><td> C function for fs_Tell</td><td> HL = file tell</td><td> All except IY</td><td>
+</td></tr>
+</table></div><div id="c_Rewind"><h1>c_Rewind</h1><h3>syscall Adress 020360</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+</table></div><div id="c_GetSize"><h1>c_GetSize</h1><h3>syscall Adress 020364</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+</table></div><div id="DONOTHING   "><h1>DONOTHING   </h1><h3>syscall Adress 02036C</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+</table></div><div id="c_Rename"><h1>c_Rename</h1><h3>syscall Adress 020374</h3>
+<table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_Rename(char *old_name, char *new_name, dir_t *directory);</td><td> C function for fs_Rename</td><td> A = 0 if failed</td><td> All</td><td>
 </td></tr>
 </table></div></body></html>

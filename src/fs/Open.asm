@@ -1,6 +1,7 @@
 ;@DOES open a file and return a handle
 ;@INPUT HL points to file name
 ;@INPUT A = file open mode
+;@INPUT DE points to directory
 ;@OUTPUT C flag set if failed
 ;@OUTPUT A = file handle if success
 ;@DESTROYS All

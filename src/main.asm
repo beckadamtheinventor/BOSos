@@ -29,6 +29,7 @@ include 'gfx.inc'
 include 'fs.inc'
 include 'str.inc'
 include 'util.inc'
+include 'lib.inc'
 include 'lib_load.asm'
 
 ;@DOES Prove Riemann Hypothesis? Fail.

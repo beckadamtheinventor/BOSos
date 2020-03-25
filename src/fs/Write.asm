@@ -10,16 +10,16 @@ fs_Write:
 	push de
 	push hl
 	call fs_GetFileHandlePtr
+	jr nc,.failed
 	ld a,(ix)
 	bit fs_write_bit,a
 	jr z,.failed
-	ld iy,(ix+4)  ; VAT pointer
 	bit fs_RAM_bit,a
+	call z,fs_MoveFileToRAM
 	pop hl
 	push hl
-	jr z,.toRAM
 	call .checkspace
-	jr c,.toRAM_2
+	call nc,fs_IncreaseFileSize
 .cont:
 	ld hl,(iy+12) ; file pointer
 	ld de,(ix+1)  ; file tell
@@ -28,21 +28,6 @@ fs_Write:
 	pop bc        ; write length
 	pop hl        ; write data
 	ldir
-	ret
-.toRAM:
-	call .checkspace
-.toRAM_2:
-	jr nc,.movetoRAM
-	ex hl,de
-	ld hl,(iy+15)
-	or a,a
-	sbc hl,de
-	ld (iy+15),hl
-.movetoRAM:
-	call fs_MoveFileToRAM
-	jr nc,.cont
-	pop hl
-	pop de
 	ret
 .failed:
 	pop hl

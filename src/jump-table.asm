@@ -82,7 +82,7 @@ table:
 	jp DONOTHING
 
 ;-------------------------------------------------------------------------------
-; VAT and FS functions
+; VAT and Filesystem functions
 ;-------------------------------------------------------------------------------
 	jp fs_BuildVAT
 	jp fs_FindSym
@@ -152,5 +152,42 @@ table:
 	jp DONOTHING
 	jp DONOTHING
 	jp DONOTHING
+
+;-------------------------------------------------------------------------------
+; C accessible filesystem functions
+;-------------------------------------------------------------------------------
+	jp c_CloseAll
+	jp c_Open
+	jp DONOTHING
+	jp c_Close
+	jp c_Read
+	jp c_Write
+	jp c_GetC
+	jp c_PutC
+	jp c_Delete
+	jp DONOTHING
+	jp c_Seek
+	jp c_Resize
+	jp c_IsArchived
+	jp c_SetArchiveStatus
+	jp c_Tell
+	jp c_Rewind
+	jp c_GetSize
+	jp DONOTHING
+	jp DONOTHING   ;maybe a detect function or two someday
+	jp DONOTHING
+	jp c_Rename
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+	jp DONOTHING
+
 
 

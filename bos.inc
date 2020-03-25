@@ -458,7 +458,7 @@ namespace bos
 ;DONOTHING                       := $20220
 ;
 ;;-------------------------------------------------------------------------------
-;; VAT and FS functions
+;; VAT and Filesystem functions
 ;;-------------------------------------------------------------------------------
 ?fs_BuildVAT                     := $20224
 ?fs_FindSym                      := $20228
@@ -528,6 +528,43 @@ namespace bos
 ;DONOTHING                       := $20318
 ;DONOTHING                       := $2031C
 ;DONOTHING                       := $20320
+;
+;;-------------------------------------------------------------------------------
+;; C accessible filesystem functions
+;;-------------------------------------------------------------------------------
+?c_CloseAll                      := $20324
+?c_Open                          := $20328
+;DONOTHING                       := $2032C
+?c_Close                         := $20330
+?c_Read                          := $20334
+?c_Write                         := $20338
+?c_GetC                          := $2033C
+?c_PutC                          := $20340
+?c_Delete                        := $20344
+;DONOTHING                       := $20348
+?c_Seek                          := $2034C
+?c_Resize                        := $20350
+?c_IsArchived                    := $20354
+?c_SetArchiveStatus              := $20358
+?c_Tell                          := $2035C
+?c_Rewind                        := $20360
+?c_GetSize                       := $20364
+;DONOTHING                       := $20368
+;DONOTHING                       := $2036C
+;DONOTHING                       := $20370
+?c_Rename                        := $20374
+;DONOTHING                       := $20378
+;DONOTHING                       := $2037C
+;DONOTHING                       := $20380
+;DONOTHING                       := $20384
+;DONOTHING                       := $20388
+;DONOTHING                       := $2038C
+;DONOTHING                       := $20390
+;DONOTHING                       := $20394
+;DONOTHING                       := $20398
+;DONOTHING                       := $2039C
+;DONOTHING                       := $203A0
+;
 ;
 ;
 ?LCD_PAL    := 0E30200h

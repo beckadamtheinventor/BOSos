@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-def error(e):	
-	print("Something went wrong! Please report this!")
+def error(e):
+	print("Something went wrong!")
 	print("Error:",e)
 	quit()
+
 def myhex(n):
 	return hex(n).replace("0x","").upper()
 
@@ -40,7 +41,7 @@ namespace bos
 		if "jp " in line:
 			line=line[line.find("jp ")+3:]
 			if ";" in line:
-				line=line[:line.find(";")]
+				line=line.split(';')[0].strip("\t ")
 			if line=="DONOTHING":
 				f.write(";DONOTHING                       := $"+myhex(counter)+"\n")
 			else:

@@ -36,3 +36,13 @@ fs_file_parent      := 12
 fs_file_len         := 15
 fs_file_data        := 18
 
+fs_data_flags       := -18
+fs_data_name        := -17
+fs_data_ext         := -9
+fs_data_parent      := -6
+fs_data_len         := -3
+fs_data_data        := 0
+
+
+
+
