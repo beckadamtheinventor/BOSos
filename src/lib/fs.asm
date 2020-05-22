@@ -189,4 +189,68 @@ c_Close:
 	ld a,l
 	jp fs_Close
 
+;@DOES C function for fs_Resize
+;@INPUT void c_Resize(int size,uint8_t handle);
+;@DESTROYS HL,DE,BC,AF,IX
+c_Resize:
+	pop de
+	pop hl
+	pop bc
+	push bc
+	push hl
+	push de
+	ld a,c
+	jr fs_Resize
+
+;@DOES check if a file is archived
+;@INPUT uint8_t c_IsArchived(uint8_t handle);
+;@DESTROYS HL,DE,BC,AF,IX
+c_IsArchived:
+	pop hl
+	pop bc
+	push bc
+	push hl
+	ld a,c
+	call fs_GetFileHandlePtr
+	ret nc
+	ld hl,(ix+fs_handle_vat)
+	bit fs_RAM_bit,(hl)
+	jr z,.inRAM
+	xor a,a
+	inc a
+	ret
+.inRAM:
+	xor a,a
+	ret
+
+;@DOES reset the tell of a file handle
+;@INPUT void c_Rewind(uint8_t handle);
+;@DESTROYS HL,DE,BC,AF,IX
+c_Rewind:
+	pop hl
+	pop bc
+	push bc
+	push hl
+	ld a,c
+	call fs_GetFileHandlePtr
+	ret nc
+	or a,a
+	sbc hl,hl
+	ld (ix+fs_handle_tell),hl
+	ret
+
+;@DOES get the size of a file
+;@INPUT int c_GetSize(uint8_t handle);
+;@DESTROYS HL,DE,BC,AF,IX
+c_GetSize:
+	pop hl
+	pop bc
+	push bc
+	push hl
+	ld a,c
+	call fs_GetFileHandlePtr
+	ret nc
+	ld ix,(ix+fs_handle_vat)
+	ld hl,(ix+fs_vat_len)
+	ret
 

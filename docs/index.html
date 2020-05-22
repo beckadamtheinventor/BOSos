@@ -471,8 +471,12 @@
 </td></tr>
 </table></div><div id="c_Resize"><h1>c_Resize</h1><h3>syscall Adress 020350</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> void c_Resize(int size,uint8_t handle);</td><td> C function for fs_Resize</td><td></td><td> HL,DE,BC,AF,IX</td><td>
+</td></tr>
 </table></div><div id="c_IsArchived"><h1>c_IsArchived</h1><h3>syscall Adress 020354</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> uint8_t c_IsArchived(uint8_t handle);</td><td> check if a file is archived</td><td></td><td> HL,DE,BC,AF,IX</td><td>
+</td></tr>
 </table></div><div id="c_SetArchiveStatus"><h1>c_SetArchiveStatus</h1><h3>syscall Adress 020358</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 <tr><td> uint8_t c_SetArchiveStatus(uint8_t status, uint8_t handle);</td><td> C function for fs_MoveFileToArc and fs_MoveFileToRAM</td><td> A = 0 if failed or move is not required</td><td> All</td><td>
@@ -483,8 +487,12 @@
 </td></tr>
 </table></div><div id="c_Rewind"><h1>c_Rewind</h1><h3>syscall Adress 020360</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> void c_Rewind(uint8_t handle);</td><td> reset the tell of a file handle</td><td></td><td> HL,DE,BC,AF,IX</td><td>
+</td></tr>
 </table></div><div id="c_GetSize"><h1>c_GetSize</h1><h3>syscall Adress 020364</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
+<tr><td> int c_GetSize(uint8_t handle);</td><td> get the size of a file</td><td></td><td> HL,DE,BC,AF,IX</td><td>
+</td></tr>
 </table></div><div id="DONOTHING   "><h1>DONOTHING   </h1><h3>syscall Adress 02036C</h3>
 <table><th>Inputs</th><th>What it does</th><th>Outputs</th><th>Destroys</th><th>Notes</th>
 </table></div><div id="c_Rename"><h1>c_Rename</h1><h3>syscall Adress 020374</h3>

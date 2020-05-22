@@ -41,6 +41,8 @@ cursor_flags           :=  29
 lcd_text_fg            :=  30
 lcd_text_bg            :=  31
 cursor_color           :=  32
+free_file_RAM_ptr      :=  33
+remaining_file_RAM     :=  36
 end namespace
 
 ; bos_sys_flags flag bits
@@ -67,6 +69,8 @@ free_VAT_entry_ptr     := $D00096
 lcd_text_fg            := $D00097
 lcd_text_bg            := $D00098
 cursor_color           := $D00099
+free_file_RAM_ptr      := $D000A0
+remaining_file_RAM     := $D000A3
 ScrapMem2              := $D000F9
 ScrapByte              := $D000FC
 ScrapWord              := $D000FD
@@ -76,7 +80,10 @@ ScrapMem               := $D000FD
 open_files_table       := $D00100
 InputBuffer            := $D00200
 gfx_string_temp        := $D00300
-
+stackbot               := $D08000
+start_of_file_RAM      := $D10000
+end_of_file_RAM        := $D40000
+total_file_RAM         := end_of_file_RAM-start_of_file_RAM
 
 ; Flash locations
 start_of_user_archive  := $0C0000 ;sector $0C, standard
